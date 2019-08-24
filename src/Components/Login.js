@@ -41,6 +41,7 @@ class Login extends PureComponent {
                 console.log('Log in successful');
                 store.set('keyID', this.state.keyID);
                 store.set('secretKey', this.state.secretKey);
+                store.set('accInfo', acc);
                 this.props.history.push('/dashboard');
             })
             .catch((err) => {

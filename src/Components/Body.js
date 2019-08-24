@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Main from './Main';
+import Home from './Home';
 import Login from './Login';
 import Dashboard from './Dashboard';
+const Store = window.require('electron-store');
+const store = new Store();
 
 class Body extends Component {
 
     render() {
-        
+
         return (
             <Router>
                 <div>
@@ -19,7 +21,7 @@ class Body extends Component {
                         </ul>
                     </nav>
 
-                    <Route path='/' exact component={Main} />
+                    <Route path='/' exact component={Home} />
                     <Route path='/login' component={Login} />
                     <Route path='/dashboard' component={Dashboard} />
 
