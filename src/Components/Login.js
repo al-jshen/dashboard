@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import Dashboard from './Dashboard';
 const Alpaca = require('@alpacahq/alpaca-trade-api');
+const Store = window.require('electron-store');
+const store = new Store();
 
 class Login extends PureComponent {
 
@@ -15,7 +17,7 @@ class Login extends PureComponent {
     }
 
     componentDidMount() {
-        if (localStorage.keyID && localStorage.secretKey) {
+        if (store.has('keyID') && store.has('secretKey')) {
             this.props.history.push('/dashboard')
         }
     }
@@ -37,13 +39,13 @@ class Login extends PureComponent {
         alpaca.getAccount()
             .then((acc) => {
                 console.log('Log in successful');
-                localStorage.setItem('keyID', this.state.keyID);
-                localStorage.setItem('secretKey', this.state.secretKey);
+                store.set('keyID', this.state.keyID);
+                store.set('secretKey', this.state.secretKey);
                 this.props.history.push('/dashboard');
             })
             .catch((err) => {
                 console.log('Log in failed');
-                localStorage.clear();
+                store.clear();
                 this.setState({
                     keyID: '',
                     secretKey: ''
