@@ -1,8 +1,4 @@
-const electron = require('electron');
-// Module to control application life.
-const app = electron.app;
-// Module to create native browser window.
-const BrowserWindow = electron.BrowserWindow;
+const { BrowserWindow, app, systemPreferences } = require('electron');
 
 const path = require('path');
 const url = require('url');
@@ -12,15 +8,19 @@ const isDev = require('electron-is-dev');
 // be closed automatically when the JavaScript object is garbage collected.
 let win;
 
+
 function createWindow() {
     // Create the browser window.
     win = new BrowserWindow({
-        width: 800,
-        height: 600,
+        backgroundColor: '#282828',
+        vibrancy: 'appearance-based',
+        title: 'alpacaDashboard',
         webPreferences: {
           nodeIntegration: true
-        }
+        },
+
     })
+    systemPreferences.setAppLevelAppearance('dark');
 
     win.loadURL(
         isDev
